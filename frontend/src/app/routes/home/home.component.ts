@@ -2,10 +2,13 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LangsService } from '../../core/services/langs.service';
 import { filter, take } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [
+    TranslateModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
