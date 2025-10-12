@@ -1,10 +1,12 @@
-import { ApplicationConfig, provideZoneChangeDetection, inject } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from "@angular/common/http";
 import { provideTranslateService } from "@ngx-translate/core";
 import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
+import { provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
 
 
 
@@ -21,5 +23,9 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json'
       })
     }),
+    provideLottieOptions({
+      player: () => player,
+    }),
+    provideCacheableAnimationLoader(),
   ]
 };

@@ -3,11 +3,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LangsService } from '../../core/services/langs.service';
 import { filter, take } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-home',
   imports: [
-    TranslateModule
+    TranslateModule,
+    LoaderComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
