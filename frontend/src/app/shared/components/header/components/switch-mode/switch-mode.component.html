@@ -1,0 +1,15 @@
+@let isDarkTheme = (isDarkTheme$ | async);
+@let switchModeTooltip = (isDarkTheme ? 'Hello' : 'World');
+
+<button 
+  mat-icon-button
+  [matTooltip]="switchModeTooltip"
+  [matTooltipShowDelay]="500"
+  (click)="switchModeService.toggleMode()"
+>
+  @if(isDarkTheme) {
+    <mat-icon>dark_mode</mat-icon>
+  } @else {
+    <mat-icon>light_mode</mat-icon>
+  }
+</button>

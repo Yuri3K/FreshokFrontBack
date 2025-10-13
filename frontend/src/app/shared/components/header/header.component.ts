@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { SwitchModeComponent } from './components/switch-mode/switch-mode.component';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    SwitchModeComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
