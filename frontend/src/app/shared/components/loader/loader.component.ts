@@ -11,11 +11,11 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 })
 export class LoaderComponent {
   @Input() diameter = 126;
-  // @Input() lottiePath = '/assets/lottie/delivery_truck.json';
-  // @Input() lottiePath = '/assets/lottie/fast_food.json';
-  // @Input() lottiePath = '/assets/lottie/restaurant_food.json';
-  @Input() lottiePath = '/assets/lottie/shopping_cart.json';
-  // @Input() lottiePath = '/assets/lottie/shopping-cart.json';
+  // private lottiePath = '/assets/lottie/delivery_truck.json';
+  // private lottiePath = '/assets/lottie/fast_food.json';
+  // private lottiePath = '/assets/lottie/restaurant_food.json';
+  private lottiePath = '/assets/lottie/shopping_cart.json';
+  // private lottiePath = '/assets/lottie/shopping-cart.json';
 
   options: AnimationOptions = {
     path: this.lottiePath,
