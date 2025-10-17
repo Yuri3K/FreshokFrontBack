@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 import admin from 'firebase-admin'
 
 dotenv.config();
-import serviceAccountJson from './freshok-market-firebase-adminsdk-fbsvc-a25e9ae2ac.json'
-const serviceAccount = serviceAccountJson as admin.ServiceAccount
+// import serviceAccountJson from '../freshok-market-firebase-adminsdk-fbsvc-a25e9ae2ac.json'
+// const serviceAccount = serviceAccountJson as admin.ServiceAccount
 
 // const serviceAccount = {
 //   "type": 'service_account',
@@ -20,8 +20,8 @@ const serviceAccount = serviceAccountJson as admin.ServiceAccount
 // } as admin.ServiceAccount;
 
 admin.initializeApp({
-  // credential: admin.credential.applicationDefault(),
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.applicationDefault(),
+  // credential: admin.credential.cert(serviceAccount),
 })
 
 export const db = admin.firestore();
