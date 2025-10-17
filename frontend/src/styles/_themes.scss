@@ -1,14 +1,10 @@
 @use '@angular/material' as mat;
 
-html {
-  color-scheme: light;
-}
-
 :root{
   @include mat.theme((
     color: (
       primary: mat.$magenta-palette,
-      tertiary: mat.$magenta-palette,
+      tertiary: mat.$azure-palette,
     ),
     typography: var(--body-font-family),
     density: 0

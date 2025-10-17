@@ -1,5 +1,6 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,12 +8,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SwitchModeService {
   private readonly document = inject(DOCUMENT);
+  private readonly route = inject(ActivatedRoute)
+  private readonly router = inject(Router)
+
   private htmlElement = this.document.querySelector('html')!;
   private isDarkThemeSubject = new BehaviorSubject<boolean>(false)
+  private readonly defaultMode = 'dark'
 
   isDarkTheme$ = this.isDarkThemeSubject.asObservable()
 
-  get mode(): boolean {
+  private get mode(): boolean {
     return this.isDarkThemeSubject.getValue()
   }
 
@@ -20,13 +25,34 @@ export class SwitchModeService {
     this.isDarkThemeSubject.next(mode)
   }
 
+  init() {
+    this.route.paramMap.subscribe(params => {
+      const modeParam = params.get('mode');
+
+      if (modeParam) {
+        const mode = modeParam == 'light'
+        this.setMode(mode)
+        this.htmlElement.style.colorScheme = modeParam
+      } else {
+        this.applyMode(this.defaultMode)
+      }
+    })
+  }
+
+  private applyMode(modeType: 'light' | 'dark') {
+    const isDarkMode = modeType === 'dark'
+    this.setMode(isDarkMode)
+    this.htmlElement.style.colorScheme = modeType
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { mode: modeType },
+      queryParamsHandling: 'merge'
+    })
+  }
+
   toggleMode() {
-    if (this.mode) {
-      this.setMode(false)
-      this.htmlElement.style.colorScheme = 'light'
-    } else {
-      this.setMode(true)
-      this.htmlElement.style.colorScheme = 'dark'
-    }
+    this.mode
+      ? this.applyMode('light')
+      : this.applyMode('dark')
   }
 }
