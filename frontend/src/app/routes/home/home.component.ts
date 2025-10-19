@@ -1,15 +1,13 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LangsService } from '../../core/services/langs.service';
-import { filter, take } from 'rxjs';
+import { filter, take, tap } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
-import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-home',
   imports: [
     TranslateModule,
-    LoaderComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -25,6 +23,7 @@ export class HomeComponent implements OnInit {
   private getLangs() {
     this.langsService.langs$
       .pipe(
+        tap(res => console.log('res', res)),
         filter(langs => langs.length > 0),
         take(1)
       )

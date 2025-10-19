@@ -1,4 +1,4 @@
-import { DOCUMENT, Location } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -43,11 +43,13 @@ export class SwitchModeService {
     const isDarkMode = modeType === 'dark'
     this.setMode(isDarkMode)
     this.htmlElement.style.colorScheme = modeType
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { mode: modeType },
-      queryParamsHandling: 'merge'
-    })
+
+      // this.router.navigate([], {
+      //   relativeTo: this.route,
+      //   queryParams: { mode: modeType },
+      //   queryParamsHandling: 'merge',
+      //   // replaceUrl: true
+      // })
   }
 
   toggleMode() {

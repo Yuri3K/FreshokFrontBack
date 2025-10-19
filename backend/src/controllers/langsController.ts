@@ -1,6 +1,7 @@
+import { Request, Response } from 'express';
 import {db} from '../config/firebaseAdmin'
 
-const getLangs = async (req: any, res: any) => {
+const getLangs = async (req: Request, res: Response) => {
   try {
     const snapshot = await db.collection('langs').get()
     const langs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));

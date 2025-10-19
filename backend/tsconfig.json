@@ -11,8 +11,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true, // Нужно для корректного импорта JSON файла в firebaseAdmin.ts
     "types": ["node"],
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
   ]
 }

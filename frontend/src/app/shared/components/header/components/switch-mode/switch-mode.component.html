@@ -3,9 +3,9 @@
 
 <button 
   mat-icon-button
+  (click)="switchModeService.toggleMode()"
   [matTooltip]="switchModeTooltip"
   [matTooltipShowDelay]="500"
-  (click)="switchModeService.toggleMode()"
 >
   @if(isDarkTheme) {
     <mat-icon>dark_mode</mat-icon>
