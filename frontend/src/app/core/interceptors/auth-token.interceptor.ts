@@ -4,6 +4,7 @@ import { catchError, from, Observable, switchMap, throwError } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
+import { SKIP_AUTH } from "./auth-context";
 
 export const authTokenInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
@@ -12,15 +13,16 @@ export const authTokenInterceptor: HttpInterceptorFn = (
   const authService = inject(AuthService)
   const router = inject(Router)
 
-  if (!req.url.startsWith(environment.serverUrl)) {
+  if (
+    !req.url.startsWith(environment.serverUrl) ||
+    req.context.get(SKIP_AUTH)
+  ) {
     return next(req)
   }
 
   return from(authService.getIdToken(false))
     .pipe(
       switchMap(token => {
-        console.log("🔸 token:", token)
-
         const authReq = token
           ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
           : req
@@ -37,10 +39,12 @@ export const authTokenInterceptor: HttpInterceptorFn = (
                         const retried = req.clone({ setHeaders: { Authorization: `Bearer ${newToken}` } })
                         return next(retried)
                       }
+                      authService.logout()
                       router.navigate(['/login']);
                       return throwError(() => err);
                     }),
                     catchError(() => {
+                      authService.logout()
                       router.navigate(['/login']);
                       return throwError(() => err);
                     })

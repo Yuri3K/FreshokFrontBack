@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, Observable, take, throwError } from 'rxjs';
+import { SKIP_AUTH } from '../interceptors/auth-context';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,18 @@ export class ApiService {
           return throwError(() => err)
         })
       )
+  }
+
+  getWithoutToken<T>(url: string, params?: string[]) {
+    const getParams = params?.length ? '?' + params.join('&') : ''
+    return this.http.get<T>(`${this.serverUrl}${url}${getParams}`, {
+      context: new HttpContext().set(SKIP_AUTH, true)
+    }).pipe(
+      take(1),
+      catchError(err => {
+        console.log(err)
+        return throwError(() => err)
+      })
+    )
   }
 }

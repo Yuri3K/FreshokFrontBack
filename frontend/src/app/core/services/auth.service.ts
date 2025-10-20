@@ -31,11 +31,6 @@ export class AuthService {
         this.router.navigate(['/login'])
       }
     })
-
-    // setTimeout(() => {
-    //   console.log('LOGOUT')
-    //   this.logout()
-    // }, 5000);
   }
 
   async signInWithGoogle(): Promise<void> {
