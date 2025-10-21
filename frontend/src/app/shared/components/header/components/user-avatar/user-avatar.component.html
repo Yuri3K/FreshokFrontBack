@@ -1,0 +1,64 @@
+@let authUser = (authUser$ | async);
+@let tooltipContent = (tooltipContent$ | async);
+
+<div class="user-avatar">
+  @if (authUser) {
+    <!-- #trigger="cdkOverlayOrigin" → сохраняет в переменной trigger ссылку на CdkOverlayOrigin (объект с координатами кнопки). Его задача — предоставить ссылку на элемент (Origin), относительно которого будет позиционироваться overlay. -->
+    <button
+      class="user-avatar__btn"
+      mat-icon-button
+      [matTooltipShowDelay]="150"
+      [matTooltipHideDelay]="150"
+      matTooltipPosition="below"
+      [matTooltip]="tooltipContent"
+      matTooltipClass="user-avatar__tooltip"
+      #trigger="cdkOverlayOrigin" 
+      cdkOverlayOrigin
+      (click)="togglePopup()"
+      >
+      <div class="user-avatar__bg">
+        @if(authUser.photoURL) {
+          <img 
+            [src]="authUser.photoURL" 
+            [alt]="'header.user.alt' | translate"
+          >
+        } @else {
+          <mat-icon>person</mat-icon>
+        }
+      </div>
+    </button>
+    
+    <!-- cdkConnectedOverlay - создаёт отдельный слой в DOM (cdk-overlay-container), который рендерится поверх всего контента.
+    cdkConnectedOverlayOpen - булево значение, которое управляет открытием/закрытием overlay.
+    cdkConnectedOverlayOrigin - то, относительно чего позиционируется overlay.
+    (detach) - событие, которое срабатывает когда overlay удаляется из DOM.
+    cdkConnectedOverlayPositions - Массив объектов, которые описывают возможные позиции overlay относительно origin.
+    Настройки означают: правый нижний угол кнопки совпадает с правым верхним углом overlay. -->
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
+      [cdkConnectedOverlayOpen]="isPopupOpen"
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayHasBackdrop]="true"
+      (backdropClick)="closePopup()"
+      (detach)="closePopup()"
+      [cdkConnectedOverlayPositions]="[
+        {
+          originX: 'end',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'top',
+          offsetY: 10
+        }
+      ]"
+    >
+      <app-avatar-popup 
+        [authUser]="authUser"
+        (closePopup)="closePopup()"
+        (logout)="logout()"
+      />
+    </ng-template>
+
+  }
+
+</div>

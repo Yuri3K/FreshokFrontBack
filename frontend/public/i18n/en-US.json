@@ -1,3 +1,17 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "common": {
+    "close":"Close",
+    "logout":"logOut",
+    "login":"logIn"
+  },
+  "header": {
+    "user": {
+      "alt": "Avatar",
+      "greetings":"Hi, {{name}}",
+      "privacy": "Privacy Policy",
+      "terms":"Terms of Service"
+    }
+  },
+  "": ""
 }

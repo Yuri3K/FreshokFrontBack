@@ -1,0 +1,54 @@
+<mat-card 
+  class="avatar-popup"
+  appearance="outlined"
+>
+  <app-btn-icon 
+    class="avatar-popup__close"
+    iconName="close" 
+    [ariaLabel]="'common.close' | translate" 
+    (click)="closePopup.emit()"
+  />
+
+  <mat-card-header class="avatar-popup__header">
+    <span>{{authUser.email}}</span>
+  </mat-card-header>
+  
+  <mat-card-content class="avatar-popup__content">
+    <img 
+      draggable="false"
+      [src]="authUser.photoURL"
+      [alt]="'header.user.alt' | translate"
+    >
+
+    <p>{{'header.user.greetings' | translate : ({name: authUser.displayName})}}</p>
+
+    <app-btn-flat 
+      class="light"
+      [btnText]="'common.logout' | translate"
+      iconName="logout"
+      (click)="logout.emit()"
+    />
+  </mat-card-content>
+
+  <mat-card-actions class="avatar-popup__actions">
+      <a 
+        [href]="privacyLink" 
+        rel='noopener noreferrer'
+        target="_blank" 
+        class="policy-link"
+      >
+        {{ 'header.user.privacy' | translate }}
+      </a>
+
+      <span class="policy-divider">•</span>
+
+      <a 
+        [href]="termsLink" 
+        rel='noopener noreferrer'
+        target="_blank" 
+        class="policy-link"
+      >
+      {{ 'header.user.terms' | translate }}
+      </a>
+  </mat-card-actions>
+</mat-card>

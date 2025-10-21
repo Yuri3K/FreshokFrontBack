@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SwitchModeComponent } from './components/switch-mode/switch-mode.component';
+import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { SwitchModeComponent } from './components/switch-mode/switch-mode.compon
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    SwitchModeComponent
+    SwitchModeComponent,
+    UserAvatarComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

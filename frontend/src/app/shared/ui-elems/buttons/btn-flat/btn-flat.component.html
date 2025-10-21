@@ -1,0 +1,22 @@
+<button
+  mat-flat-button
+  [disabled]="btnDisabled"
+  [attr.aria-label]="ariaLabel"
+  [matTooltip]="tooltipText"
+  [matTooltipShowDelay]="150"
+  [matTooltipHideDelay]="150"
+  [type]="type"
+>
+
+  @if(iconName) {
+    <mat-icon
+      [ngStyle]="{
+        color: iconColor,
+        fontSize: fz,
+      }"
+    >
+      {{iconName}}
+    </mat-icon>
+  }
+  {{btnText}}
+</button>

@@ -1,0 +1,47 @@
+.avatar-popup{
+  --mdc-outlined-card-container-shape: 30px;
+
+  position: relative;
+  width: 428px;
+
+}
+
+.avatar-popup__close{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.avatar-popup__header{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--mat-sys-secondary);
+  margin-bottom: 24px;
+}
+
+.avatar-popup__content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 10px;
+
+  img{
+    border-radius: 50%;
+  }
+}
+
+.avatar-popup__actions{
+  justify-content: center;
+  gap: 10px;
+  color: var(--mat-sys-secondary);
+
+  a {
+    text-decoration: none;
+    &:visited {
+      color: var(--mat-sys-secondary);
+    }
+  }
+}

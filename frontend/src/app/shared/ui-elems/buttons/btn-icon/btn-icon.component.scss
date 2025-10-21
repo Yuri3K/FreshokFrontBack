@@ -1,0 +1,16 @@
+:host {
+  &.disabled {
+    pointer-events: none;
+  }
+  button {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      width: auto;
+      height: auto;
+    }
+  }
+}
