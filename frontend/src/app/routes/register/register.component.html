@@ -1,8 +1,67 @@
 <div class="register">
-  <h2>{{'register-page.sign-in' | translate}}</h2>
-  <form [formGroup]="registerForm", (ngSubmit)="onSubmit()" class="refister__form">
-    <mat-form-field>
-      
+  <app-h2-title 
+    [text]="'register-page.sign-in' | translate"
+  />
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register__form">
+    <mat-form-field 
+      appearance="outline"
+      class="form-control"
+    >
+      <mat-label>Enter nickname</mat-label>
+      <input 
+        matInput 
+        type="'text" 
+        placeholder="User"
+        formControlName="displayName"
+      >
+      <mat-icon
+        matSuffix
+      >
+        person
+      </mat-icon>
+      <mat-hint>Hint</mat-hint>
     </mat-form-field>
+    <mat-form-field 
+      appearance="outline"
+      class="form-control"
+    >
+      <mat-label>Enter your email</mat-label>
+      <input 
+        matInput 
+        type="'text" 
+        placeholder="example@gmail.com"
+        formControlName="email"
+      >
+      <mat-icon matSuffix>
+        email
+      </mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+    <mat-form-field 
+      appearance="outline"
+      class="form-control"
+    >
+      <mat-label>Enter your password</mat-label>
+      <input 
+        matInput 
+        [type]="isPwdHide() ? 'password' : 'text'" 
+        formControlName="password"
+      >
+      <button
+        matIconButton
+        matSuffix
+        (click)="togglePwdVisibility($event)"
+        [attr.aria-label]="isPwdHide() ? 'Show password' : 'Hide password'"
+        [attr.aria-pressed]="isPwdHide()"
+      >
+        <mat-icon>{{isPwdHide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <app-btn-flat 
+      btnText="Sign In"
+      type="submit"
+    />
   </form>
 </div>

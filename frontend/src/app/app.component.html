@@ -1,9 +1,9 @@
 @let authInitializing = (authInitializing$ | async);
 
 @if(authInitializing) {
-  <div @fade class="loader-wrapper">
+  <!-- <div @fade class="loader-wrapper"> -->
     <app-loader class="global" />
-  </div>
+  <!-- </div> -->
 } @else {
   <div @fade class="main-wrapper">
     <router-outlet />

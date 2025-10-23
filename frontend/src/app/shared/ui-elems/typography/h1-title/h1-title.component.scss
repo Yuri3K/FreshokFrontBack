@@ -1,0 +1,22 @@
+:host {
+  h1 .main,
+  h1 .subtitle {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 120%;
+  }
+
+  h1 .subtitle {
+    display: block;
+    color: var(--text-neutral);
+  }
+}
+
+:host.gradient {
+  h1 .main {
+    background: linear-gradient(90deg, #4285F4 0%, #B76FFE 61.06%, #DF2D9E 105.53%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
