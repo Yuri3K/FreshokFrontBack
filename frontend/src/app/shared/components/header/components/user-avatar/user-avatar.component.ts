@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, inject, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,17 +39,18 @@ export class UserAvatarComponent {
       )
     )
 
-    isPopupOpen = false
+  isPopupOpen = false
 
-    togglePopup() {
-      this.isPopupOpen = !this.isPopupOpen
-    }
 
-    closePopup() {
-      this.isPopupOpen = false
-    }
+  togglePopup() {
+    this.isPopupOpen = !this.isPopupOpen
+  }
 
-    logout() {
-      this.authService.logout()
-    }
+  closePopup() {
+    this.isPopupOpen = false
+  }
+
+  logout() {
+    this.authService.logout()
+  }
 }

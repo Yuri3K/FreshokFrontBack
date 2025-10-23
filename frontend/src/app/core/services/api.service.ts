@@ -12,32 +12,37 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  get<T>(url: string, params?: string[]): Observable<T> {
-    let getParams = ''
-    if (params && params.length > 0) {
-      getParams += (getParams ? '&' : '?') + params.join('&')
-    }
+  private handle<T>(obs: Observable<T>): Observable<T> {
+    return obs.pipe(
+      take(1),
+      catchError(err => {
+        console.log(err);
+        return throwError(() => err)
+      })
+    )
+  }
 
-    return this.http.get<T>(`${this.serverUrl}${url}${getParams}`)
-      .pipe(
-        take(1),
-        catchError(err => {
-          console.log(err)
-          return throwError(() => err)
-        })
-      )
+  get<T>(url: string, params?: string[]): Observable<T> {
+    const getParams = params?.length ? '?' + params.join('&') : '';
+
+    return this.handle(this.http.get<T>(`${this.serverUrl}${url}${getParams}`))
   }
 
   getWithoutToken<T>(url: string, params?: string[]) {
     const getParams = params?.length ? '?' + params.join('&') : ''
-    return this.http.get<T>(`${this.serverUrl}${url}${getParams}`, {
+
+    return this.handle(this.http.get<T>(`${this.serverUrl}${url}${getParams}`, {
       context: new HttpContext().set(SKIP_AUTH, true)
-    }).pipe(
-      take(1),
-      catchError(err => {
-        console.log(err)
-        return throwError(() => err)
-      })
-    )
+    }))
+  }
+
+  post<T>(url: string,  body: any): Observable<T> {
+    return this.handle(this.http.post<T>(`${this.serverUrl}${url}`, body))
+  }
+
+  postWithoutToken<T>(url: string, body: any): Observable<T> {
+    return this.handle(this.http.post<T>(`${this.serverUrl}${url}`, body, {
+      context: new HttpContext().set(SKIP_AUTH, true)
+    }))
   }
 }

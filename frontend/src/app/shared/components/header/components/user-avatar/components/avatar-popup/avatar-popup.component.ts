@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { BtnIconComponent } from '../../../../../../ui-elems/buttons/btn-icon/btn-icon.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { User } from 'firebase/auth';
@@ -24,4 +24,12 @@ export class AvatarPopupComponent {
 
   readonly privacyLink = 'https://policies.google.com/privacy?hl=en'
   readonly termsLink = 'https://policies.google.com/terms?hl=en'
+
+  @HostListener('document:click', ['$event'])
+  onClickInside(event: PointerEvent) {
+    const target = event.target as HTMLElement
+    if(!target.closest('app-avatar-popup')) {
+      this.closePopup.emit()
+    }
+  }
 }

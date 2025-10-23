@@ -13,5 +13,8 @@
       "terms":"Terms of Service"
     }
   },
-  "": ""
+  "register-page": {
+    "sign-in": "Sign In"
+
+  }
 }
