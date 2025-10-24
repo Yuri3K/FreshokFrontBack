@@ -1,6 +1,11 @@
 <div class="login-container">
-  <h2>Login</h2>
-  <button mat-raised-button color="primary" (click)="loginWithGoogle()">
-    Sign in with Google
-  </button>
+  <app-h2-title 
+    [text]="'login-page.title' | translate"
+  />
+  
+  <app-btn-flat 
+    [btnText]="'login-page.login-with-google' | translate"
+    iconName="login"
+    (click)="loginWithGoogle()"
+  />
 </div>

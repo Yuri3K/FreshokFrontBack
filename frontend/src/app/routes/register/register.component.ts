@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,9 +32,21 @@ export class RegisterComponent {
   isPwdHide = signal(true);
   registerForm = this.fb.group({
     displayName: ['', [Validators.required, Validators.minLength(2)]],
-    email: ['', [Validators.required, Validators.minLength]],
-    password: ['', Validators.required, Validators.minLength(6)]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
   })
+
+  get displayNameControl(): FormControl<string> {
+    return this.registerForm.get('displayName') as FormControl<string>
+  }
+
+  get emailControl(): FormControl<string> {
+    return this.registerForm.get('email') as FormControl<string>
+  }
+
+  get passwordControl(): FormControl<string> {
+    return this.registerForm.get('password') as FormControl<string>
+  }
 
   togglePwdVisibility(event: MouseEvent) {
     event.preventDefault()

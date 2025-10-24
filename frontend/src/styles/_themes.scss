@@ -3,8 +3,8 @@
 :root{
   @include mat.theme((
     color: (
-      primary: mat.$magenta-palette,
-      tertiary: mat.$azure-palette,
+      primary: mat.$azure-palette,
+      tertiary: mat.$magenta-palette,
     ),
     typography: var(--body-font-family),
     density: 0
